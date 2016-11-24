@@ -1,0 +1,885 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+\title{\huge \textbf{Assignment - 10} \\[0.2in]
+		\large \textbf{Lid-Driven Cavity} \\[0.5in]
+		\large Particle Methods For Fluid Flow Simulation \\
+		\large \textbf{AE - 625}	}
+		
+\author{\textbf{Sanka Venkata Sai Suraj} \\
+		Roll no: 130010057 } 
+		
+\date{November 24, 2016}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Introduction}
+
+The aim is to simulate Lid-Driven Cavity problem and to compare velocity profiles with exact solution. To do this the following kernels and dx and hdx values are considered\\
+\textbf{Kernels:}
+\begin{enumerate}
+	\item Cubic Spline
+	\item Gaussian
+	\item Quintic Spline
+	\item Super Gaussian
+	\item WendlandQuintic
+\end{enumerate} 
+\textbf{dx:}
+dx is changed by changing nx values $dx = \frac{L}{n_x}$, where L is considered to be 1.0 m as the cavity is a 1m x 1m square cavity. The following nx values are simulated
+\begin{enumerate}
+	\item 50
+	\item 100
+	\item 200
+\end{enumerate}
+\textbf{hdx:}
+\begin{enumerate}
+	\item 0.5
+	\item 1.0
+	\item 1.5
+	\item 2.0
+\end{enumerate}
+
+\chapter{Problems Encountered During Simulations}
+\section{Problems in hdx Value}
+Plots for hdx value of 0.5 are similar to the following for all nx values and Kernels
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_0.5_50/centerline.png}
+	\caption{Velocities at centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_0.5_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\newpage
+\noindent
+Plots for hdx value of 0.8 are similar to the following for all nx values and Kernels
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_0.8_50/centerline.png}
+	\caption{Velocities at centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_0.8_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\noindent
+Since the velocities do not agree well with exact solution and streamlines are also bad for $hdx < 1.0$ the simulations are carried out and results are presented only for $hdx \geq 1.0$ \\
+
+\section{Problems with Kernels}
+While using Super Gaussian Kernel the following error was obtained due to which this kernel wasn't used for further simulations \\
+\textbf{Error:}\\
+\indent LinkedListNNPS requires too many cells for super gaussian kernel\\[0.2in]
+
+\noindent
+The simulations are now carried out with the remaining kernels and hdx values. So total simulations are 4 kernels x 3 hdx x 3 dx = 36 simulations.\\
+tf for each simulation = 8 s \\
+Total time taken for the simulations = 48 hours ! 
+
+\chapter{Simulation Results}
+
+\section{Cubic Spline Kernel}
+\subsection{hdx = 1.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = 0.9\textwidth]{./cs_1.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./cs_1.5_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_1.5_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./cs_2.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./cs_2.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+
+\section{Gaussian Kernel}
+\subsection{hdx = 1.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = 0.9\textwidth]{./g_1.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./g_1.5_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_1.5_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./g_2.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./g_2.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\section{Quintic Spline Kernel}
+\subsection{hdx = 1.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = 0.9\textwidth]{./qs_1.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./qs_1.5_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_1.5_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./qs_2.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./qs_2.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\section{WendlandQuintic Kernel}
+\subsection{hdx = 1.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = 0.9\textwidth]{./wq_1.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./wq_1.5_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 1.5 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_1.5_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 50}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_50/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_50/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\centering
+	\includegraphics[width = \textwidth]{./wq_2.0_50/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 100}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_100/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_100/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_100/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\subsection{hdx = 2.0 and nx = 200}
+\begin{figure}[H]
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_200/centerline.png}
+	\caption{Velocities at Centerline}
+\end{subfigure}
+\begin{subfigure}{0.5\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_200/ke_history.png}
+	\caption{Kinetic Energy w.r.t Time}
+\end{subfigure}
+\medskip
+\begin{subfigure}{\textwidth}
+	\includegraphics[width = \textwidth]{./wq_2.0_200/streamplot.png}
+	\caption{Streamlines}
+\end{subfigure}
+\end{figure}
+
+\chapter{Error Plots}
+\section{Comparison between Kernels}
+\begin{center}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_10_50error.png}
+	\caption{Error when hdx = 1.0 and nx = 50}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_10_100error.png}
+	\caption{Error when hdx = 1.0 and nx = 100}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_10_200error.png}
+	\caption{Error when hdx = 1.0 and nx = 200}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_15_50error.png}
+	\caption{Error when hdx = 1.5 and nx = 50}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_15_100error.png}
+	\caption{Error when hdx = 1.5 and nx = 100}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_15_200error.png}
+	\caption{Error when hdx = 1.5 and nx = 200}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_20_50error.png}
+	\caption{Error when hdx = 2.0 and nx = 50}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_20_100error.png}
+	\caption{Error when hdx = 2.0 and nx = 100}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{kernels_20_200error.png}
+	\caption{Error when hdx = 2.0 and nx = 200}
+\end{figure}
+\end{center}
+
+\section{Comparison between nx values}
+\subsection{hdx = 1.0}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_cs_10error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_g_10error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_qs_10error.png}
+	\caption{Error for QuinticSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_wq_10error.png}
+	\caption{Error for WendlandQuintic kernel}
+\end{figure}
+
+\subsection{hdx = 1.5}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_cs_15error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_g_15error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_qs_15error.png}
+	\caption{Error for QuinticSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_wq_15error.png}
+	\caption{Error for WendlandQuintic kernel}
+\end{figure}
+
+\subsection{hdx = 2.0}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_cs_20error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_g_20error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_qs_20error.png}
+	\caption{Error for QuinticSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{nx_wq_20error.png}
+	\caption{Error for WendlandQuintic kernel}
+\end{figure}
+
+\section{Comparison between hdx values}
+\subsection{nx = 50}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_cs_50error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_g_50error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_qs_50error.png}
+	\caption{Error for QuinticSplint kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_wq_50error.png}
+	\caption{Error for WendlandQuintic Spline}
+\end{figure}
+
+\subsection{nx = 100}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_cs_100error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_g_100error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_qs_100error.png}
+	\caption{Error for QuinticSplint kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_wq_100error.png}
+	\caption{Error for WendlandQuintic Spline}
+\end{figure}
+
+\subsection{nx = 200}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_cs_200error.png}
+	\caption{Error for CubicSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_g_200error.png}
+	\caption{Error for Gaussian kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_qs_200error.png}
+	\caption{Error for QuinticSpline kernel}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width = \textwidth]{hdx_wq_200error.png}
+	\caption{Error for WendlandQuintic Spline}
+\end{figure}
+
+
+\chapter{Conclusions}
+\begin{itemize}
+	\item Error is calculated using L2 modulus. L2error is given by:
+	$$\frac{\sqrt{\sum_i^N\left(ye_i - yn_i \right)^2}}{N}$$
+	Where ye is the exact solution, yn is the numerical solution and N is the length of yn(or ye).
+	\item By looking at the plots of error vs kernel WendlandQuintic Spline has less error when hdx is 1.0 but the error is almost the same for higher values of hdx. So when choosing a value of hdx which is closer to 1.0 it is better to choose WendlandQuintic Spline and when hdx is high then choosing of kernel should be on basis of speed.
+	\item Higher values of nx produce less errors irrespective of kernels and hdx values which is obvious. However with increase in nx the time taken by the program increases so choosing the value of nx depends on the required accuracy and speed. 
+	\item Error with respect to hdx is same for all values of nx but it is less for WendlandQuintic kenel when hdx = 1.0. So choose hdx = 1.0 when kernel is WendlandQuintic and when the kernel is not WendlandQuintic choose a value of hdx such that the program takes less time which is at hdx = 1.0 again. So hdx should be always closer to 1.0 for better results and time taken.
+\end{itemize}
+
+
+
+\end{document}
